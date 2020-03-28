@@ -117,8 +117,13 @@
               "devServerTarget": "Access-control-system:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "Access-control-system"
 }

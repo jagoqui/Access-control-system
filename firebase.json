@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "Access-control-system",
+      "public": "dist/Access-control-system",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

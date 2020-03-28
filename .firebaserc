@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "crud-access-control-system": {
+      "hosting": {
+        "Access-control-system": [
+          "crud-access-control-system"
+        ]
+      }
+    }
+  }
+}
