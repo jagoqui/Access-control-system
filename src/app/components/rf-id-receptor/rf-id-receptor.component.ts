@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 // Firebase connection service
-import {FirebaseConnectionService} from '../../services/firebase-connection.service'
+import {FirebaseConnectionService} from '../../services/firebase-connection.service';
 @Component({
   selector: 'app-rf-id-receptor',
   templateUrl: './rf-id-receptor.component.html',
-  styleUrls: ['./rf-id-receptor.component.css']
+  styleUrls: ['./rf-id-receptor.component.css'],
 })
 export class RFIdReceptorComponent implements OnInit {
   UsersView: any;
@@ -14,15 +13,16 @@ export class RFIdReceptorComponent implements OnInit {
   constructor(private connection: FirebaseConnectionService) {
     this.RF_ID = '';
     this.action = '';
+    // Firebase connection init
     connection.getAllUsers().subscribe(returnUsers => { // Le paso los items de la base de datos a la conexión
       this.UsersView = returnUsers;
       console.log(this.UsersView);
     });
   }
-
   ngOnInit(): void {
   }
-
+  // Vallidation RF ID
+  /////////////////////////////////////////////////
   public getRF_ID() {
     return this.RF_ID;
   }
@@ -41,5 +41,8 @@ export class RFIdReceptorComponent implements OnInit {
       alert('Enter some value on input');
     }
   }
-
+  //////////////////////////////////////////////////
+  keyEvent(event) {
+    alert(event.key);
+  }
 }

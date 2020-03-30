@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <!-- RF ID scanner -->
     <div class="container bg-secondary rounded col-6 p-2 mt-1 col-md-5 col-lg-4 mt-sm-2">
         <div class="row">
             <div class="container d-flex">
@@ -27,18 +28,43 @@
                 </label>
                 <input type="text" class="container form-control col-10 my-2 col-sm-7 col-md-8 col-lg-9" name=""
                     id="RF_ID" aria-describedby="helpId" placeholder="Enter RF ID user" [(ngModel)]="RF_ID"
-                    onkeydown="if(event.key=='Enter'){actionButton.click()}" autofocus>
+                    (keydown.enter)="actionButton.click();ModalSelect.open(Modal)" autofocus>
             </div>
-            <button type="submit" class="container btn btn-primary col-7 col-sm-5 cold-md-3"
-                (click)="doAction();RF_ID=''" id="actionButton">Submit</button>
+            <button type="submit" class="container btn btn-outline-primary col-7 col-sm-5 cold-md-3"
+                (click)="doAction();ModalSelect.open(Modal);RF_ID=''" #actionButton>Submit</button>
         </div>
     </div>
-    <div *ngIf="action!=''">
-        <app-view-users *ngIf="action=='List user'; else CreateUser"></app-view-users>
-        <ng-template #CreateUser>
-            <app-create-new-user></app-create-new-user>
-        </ng-template>
-    </div>
+    <app-modal-component #ModalSelect></app-modal-component>
+    <!-- Modal -->
+    <ng-template #Modal let-modal>
+        <div class="modal-header">
+            <div [ngSwitch]="action">
+                <div *ngSwitchCase="'List user'">
+                    <h4 class="modal-title">User {{RF_ID}} found</h4>
+                </div>
+                <div *ngSwitchCase="'Create new user'">
+                    <h4 class="modal-title">User {{RF_ID}} no foud, please add it</h4>
+                </div>
+            </div>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div [ngSwitch]="action">
+                <div *ngSwitchCase="'List user'">
+                    <app-view-users></app-view-users>
+                </div>
+                <div *ngSwitchCase="'Create new user'">
+                    <app-create-new-user></app-create-new-user>
+                </div>
+            </div> 
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+        </div>
+    </ng-template>
+    Action:{{action}}
 </body>
 
 </html>
