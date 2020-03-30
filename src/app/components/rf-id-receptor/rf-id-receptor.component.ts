@@ -42,7 +42,5 @@ export class RFIdReceptorComponent implements OnInit {
     }
   }
   //////////////////////////////////////////////////
-  keyEvent(event) {
-    alert(event.key);
-  }
+
 }
